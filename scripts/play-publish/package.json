@@ -1,0 +1,10 @@
+{
+  "name": "gulf-job-hub-play-publish",
+  "private": true,
+  "version": "1.0.0",
+  "description": "One-off script to publish Gulf Job Hub's Android app bundle to Google Play via the Android Publisher API.",
+  "type": "commonjs",
+  "dependencies": {
+    "googleapis": "^176.0.0"
+  }
+}
