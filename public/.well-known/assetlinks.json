@@ -3,9 +3,9 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "online.sbtjobshub.twa",
+      "package_name": "co.median.android.lpqyqnb",
       "sha256_cert_fingerprints": [
-        "AB:18:9D:D2:3A:EE:36:1F:80:A8:F9:B5:C1:27:33:C8:15:35:C2:B2:41:A3:79:79:AF:0D:8C:25:26:4D:CA:55"
+        "D4:5E:B7:CD:B8:13:9B:CA:36:73:BE:5F:96:EA:CB:87:0C:23:8B:27:42:51:16:36:54:A6:A9:ED:5E:B2:73:D4"
       ]
     }
   }

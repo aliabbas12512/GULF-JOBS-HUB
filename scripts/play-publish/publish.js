@@ -13,7 +13,9 @@
  *                                  by PWABuilder (or Bubblewrap).
  *
  * Optional:
- *   PACKAGE_NAME  (default: online.sbtjobshub.twa)
+ *   PACKAGE_NAME  (default: co.median.android.lpqyqnb - the Median.co
+ *                  app ID for Gulf Job Hub; override if you rebuild
+ *                  under a different package)
  *   TRACK         (default: internal - use "production" only when ready
  *                  to go live to everyone)
  *
@@ -33,7 +35,7 @@
 const fs = require("fs");
 const { google } = require("googleapis");
 
-const PACKAGE_NAME = process.env.PACKAGE_NAME || "online.sbtjobshub.twa";
+const PACKAGE_NAME = process.env.PACKAGE_NAME || "co.median.android.lpqyqnb";
 const TRACK = process.env.TRACK || "internal";
 const SERVICE_ACCOUNT_PATH = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
 const AAB_PATH = process.env.AAB_PATH;
