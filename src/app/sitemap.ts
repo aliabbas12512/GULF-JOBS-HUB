@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { supabaseAdmin } from "@/lib/supabase/server";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://gulfjobhub.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sbtjobshub.online";
 
 // Regenerate hourly so newly published/bulk-imported jobs appear in the
 // sitemap without requiring a full redeploy.

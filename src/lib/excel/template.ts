@@ -10,6 +10,7 @@ import {
 export function buildTemplateWorkbook(options: {
   countries: string[];
   categories: string[];
+  cities: { name: string; country: string }[];
 }): Buffer {
   const wb = XLSX.utils.book_new();
 
@@ -31,7 +32,7 @@ export function buildTemplateWorkbook(options: {
     ["2. Keep the example row as a reference, or delete it before uploading."],
     ["3. Required columns must not be left empty:"],
     [REQUIRED_COLUMNS.join(", ")],
-    ["4. 'Country' and 'City' must exactly match values on the 'Accepted Values' sheet."],
+    ["4. 'Country' must exactly match the 'Countries' column, and 'City' must exactly match the city name on the 'Accepted Values' sheet - just the city name itself, without the country in parentheses (e.g. type \"Riyadh\", not \"Riyadh (Saudi Arabia)\")."],
     ["5. 'Category' must exactly match a value on the 'Accepted Values' sheet."],
     ["6. 'Employment Type' must be one of: " + EMPLOYMENT_TYPE_VALUES.join(", ")],
     ["7. 'Status' must be one of: " + STATUS_VALUES.join(", ") + ". Published jobs go live immediately; Draft jobs stay hidden."],
@@ -62,11 +63,13 @@ export function buildTemplateWorkbook(options: {
   instructionsSheet["!cols"] = [{ wch: 34 }, { wch: 80 }];
   XLSX.utils.book_append_sheet(wb, instructionsSheet, "Instructions");
 
+  const cityLabels = options.cities.map((c) => `${c.name} (${c.country})`);
   const acceptedRows: (string | number)[][] = [
-    ["Countries", "Categories", "Employment Types", "Status"],
+    ["Countries", "Cities", "Categories", "Employment Types", "Status"],
   ];
   const maxLen = Math.max(
     options.countries.length,
+    cityLabels.length,
     options.categories.length,
     EMPLOYMENT_TYPE_VALUES.length,
     STATUS_VALUES.length
@@ -74,13 +77,14 @@ export function buildTemplateWorkbook(options: {
   for (let i = 0; i < maxLen; i++) {
     acceptedRows.push([
       options.countries[i] ?? "",
+      cityLabels[i] ?? "",
       options.categories[i] ?? "",
       EMPLOYMENT_TYPE_VALUES[i] ?? "",
       STATUS_VALUES[i] ?? "",
     ]);
   }
   const acceptedSheet = XLSX.utils.aoa_to_sheet(acceptedRows);
-  acceptedSheet["!cols"] = [{ wch: 22 }, { wch: 22 }, { wch: 20 }, { wch: 14 }];
+  acceptedSheet["!cols"] = [{ wch: 20 }, { wch: 26 }, { wch: 22 }, { wch: 18 }, { wch: 12 }];
   XLSX.utils.book_append_sheet(wb, acceptedSheet, "Accepted Values");
 
   const buf = XLSX.write(wb, { type: "buffer", bookType: "xlsx" });

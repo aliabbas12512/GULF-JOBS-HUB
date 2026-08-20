@@ -27,7 +27,7 @@ cp .env.example .env.local
 | `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL (Settings → API). |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase **service_role** key (Settings → API). Server-only, required for every write. Never expose this to the browser. |
 | `SESSION_SECRET` | Random 32+ byte secret used to sign session cookies. Generate with `node -e "console.log(require('crypto').randomBytes(48).toString('base64'))"`. |
-| `NEXT_PUBLIC_SITE_URL` | The production URL (e.g. `https://gulfjobhub.com`), used for canonical URLs, sitemap, and structured data. |
+| `NEXT_PUBLIC_SITE_URL` | The production URL (e.g. `https://sbtjobshub.online`), used for canonical URLs, sitemap, and structured data. |
 
 ### 2. Database
 
@@ -62,7 +62,7 @@ stored anywhere in this repository. **Change the password immediately after your
 4. Add the environment variables from the table above under **Project Settings → Environment
    Variables** (all four, for Production and Preview).
 5. Deploy. Vercel auto-detects Next.js — no build command changes are needed.
-6. Once live, point your domain (`gulfjobhub.com`) at the Vercel project under **Project Settings →
+6. Once live, point your domain (`sbtjobshub.online`) at the Vercel project under **Project Settings →
    Domains**, and update `NEXT_PUBLIC_SITE_URL` to match.
 7. Verify `/sitemap.xml` and `/robots.txt` resolve correctly, then submit the sitemap in Google
    Search Console.
