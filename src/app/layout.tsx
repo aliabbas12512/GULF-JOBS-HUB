@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { getSiteSettings } from "@/lib/db/settings";
-import { SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
+import { SITE_NAME, SITE_TAGLINE, ADSENSE_CLIENT_ID } from "@/lib/constants";
 import { safeJsonLd } from "@/lib/utils/jsonLd";
 
 const geistSans = Geist({
@@ -45,6 +46,9 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
     },
     robots: { index: true, follow: true },
+    other: {
+      "google-adsense-account": ADSENSE_CLIENT_ID,
+    },
   };
 }
 
@@ -73,6 +77,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
+      {/* Google AdSense - loaded once site-wide via next/script so Next.js
+          de-duplicates it across client-side navigation. */}
+      <Script
+        id="adsbygoogle-init"
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+        crossOrigin="anonymous"
+        strategy="afterInteractive"
+      />
     </html>
   );
 }
