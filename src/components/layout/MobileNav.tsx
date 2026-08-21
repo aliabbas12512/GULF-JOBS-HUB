@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useMounted } from "@/lib/hooks/useMounted";
 import type { SessionUser } from "@/types";
 
 const links = [
@@ -16,11 +17,7 @@ const links = [
 
 export function MobileNav({ session }: { session: SessionUser | null }) {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   useEffect(() => {
     if (!open) return;

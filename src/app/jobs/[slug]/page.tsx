@@ -23,7 +23,7 @@ import { EMPLOYMENT_TYPE_LABELS } from "@/lib/constants";
 import { buildJobPostingSchema, buildBreadcrumbSchema } from "@/lib/seo/jobPostingSchema";
 import { safeJsonLd } from "@/lib/utils/jsonLd";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sbtjobshub.online";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.sbtjobshub.online";
 
 type Params = { slug: string };
 

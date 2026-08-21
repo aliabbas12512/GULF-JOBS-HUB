@@ -1,16 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useMounted } from "@/lib/hooks/useMounted";
 import type { JobWithRelations } from "@/types";
 import { ApplyButtons } from "./ApplyButtons";
 
 export function StickyApplyBar({ job }: { job: JobWithRelations }) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   if (!mounted) return null;
 

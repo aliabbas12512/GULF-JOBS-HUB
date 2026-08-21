@@ -273,7 +273,7 @@ export async function ensureCompanyByName(name: string, logoUrl?: string | null)
 }
 
 export async function ensureUniqueJobSlug(base: string): Promise<string> {
-  let slug = base;
+  const slug = base;
   let suffix = 0;
   for (;;) {
     const candidate = suffix === 0 ? slug : `${slug}-${suffix}`;
