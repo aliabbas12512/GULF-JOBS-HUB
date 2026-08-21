@@ -4,7 +4,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { getSiteSettings } from "@/lib/db/settings";
+import { AdSlot } from "@/components/ads/AdSlot";
+import { getSiteSettings, getAdSlots } from "@/lib/db/settings";
 import { SITE_NAME, SITE_TAGLINE, ADSENSE_CLIENT_ID } from "@/lib/constants";
 import { safeJsonLd } from "@/lib/utils/jsonLd";
 
@@ -18,7 +19,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sbtjobshub.online";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.sbtjobshub.online";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings().catch(() => null);
@@ -52,7 +53,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const settings = await getSiteSettings().catch(() => null);
+  const adSlots = settings ? getAdSlots(settings) : null;
   const organizationLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -73,6 +76,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: safeJsonLd(organizationLd) }}
         />
+        {adSlots && (
+          <AdSlot enabled={adSlots.header_enabled} code={adSlots.header_code} label="Header" />
+        )}
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
